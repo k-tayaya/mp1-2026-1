@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <iostream>
 class temper {
 	double temp;
 public:
@@ -11,48 +12,48 @@ public:
 		temp = celsi;
 	}
 	void print() {
-		printf("\nВ цельсия : % f\n", temp);
+		std::cout <<"\nВ цельсия: "<<temp<<"\n";
 	}
 	double far() {
 		double farg;
 		farg = temp * (1.8) + 32;
-		printf("\nв фаренгейтах: %f\n", farg);
+		std::cout <<"\nВ фаренгейтах: "<<farg<<"\n";
 		return farg;
 	}
 	double kel() {
 		double kelvin;
 		kelvin = temp + 273.15;
-		printf("\nв Кельвинах: %f\n", kelvin);
+		std::cout <<"\nВ Кельвинах: \n"<<kelvin<<"\n";
 		return kelvin;
 	}
 	double rank() {
 		double rankin;
 		rankin = (temp + 273.15)*(1.8);
-		printf("\nв Ранкинах: %f\n", rankin);
+		std::cout <<"\nВ Ранкинах: "<<rankin<<"\n";
 		return rankin;
 	}
 	double deli() {
 		double delilu;
 		delilu = (100-temp) * 1.5;
-		printf("\nпо Делилю: %f\n", delilu);
+		std::cout <<"\nПо Делилю: "<<delilu<<"\n";
 		return delilu;
 	}
 	double niut() {
 		double niuton;
 		niuton = temp * 0.33;
-		printf("\nпо Ньютону: %f\n", niuton);
+		std::cout <<"\nПо Ньютону: "<<niuton<<"\n";
 		return niuton;
 	}
 	double reom() {
 		double reomur;
 		reomur = temp * 0.8;
-		printf("\nпо Реомюру: %f\n", reomur);
+		std::cout <<"\nПо Реомюру: "<<reomur<<"\n";
 		return reomur;
 	}
 	double rem() {
 		double remer;
 		remer = temp *(21.0/40.0)+7.5;
-		printf("\nпо Рёмеру: %f\n", remer);
+		std::cout << "\nПо Рёмеру: "<<remer<<"\n";
 		return remer;
 	}
 };
@@ -61,15 +62,15 @@ int main() {
 	int a;
 	bool q = true;
 	double temp;
-	printf("Ведите температуру в градусах цельсия\n");
-	scanf_s(" %lf", &temp);
+	std::cout <<"Ведите температуру в градусах цельсия"<<"\n";
+	std::cin >>temp;
 	temper t(temp);
 	while (q == true){
-		printf("\nВ какие единицы перевести:\n");
-		printf("0-стоп\n1-вывести в цельсия\n2-Фаренгейт\n3-Кельвины\n"\
+		std::cout <<"\nВ какие единицы перевести:"<<"\n";
+		std::cout <<"0-стоп\n1-вывести в цельсия\n2-Фаренгейт\n3-Кельвины\n"\
 			"4-Ранкины\n5 - по Делилю\n6 - по Ньютону\n7 - по Реомюру\n8 - по Рёмеру\n"\
-			"9-сменить значение\n");
-		scanf_s("%i", &a);
+			"9-сменить значение"<<"\n";
+		std::cin >> a;
 		if (a == 0) {
 			q = false;
 		}
@@ -98,8 +99,8 @@ int main() {
 			t.rem();
 		}
 		if (a == 9) {
-			printf("Ведите температуру в градусах цельсия\n");
-			scanf_s(" %lf", &temp);
+			std::cout<<"Ведите температуру в градусах цельсия"<<"\n";
+			std::cin >>temp;
 			t.smen(temp);
 		}
 	}
