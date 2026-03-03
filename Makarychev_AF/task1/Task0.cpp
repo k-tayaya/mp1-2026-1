@@ -1,6 +1,5 @@
 #include <iostream>
 #include <numeric>
-
 class Rac {
     private:
         int a;
@@ -52,7 +51,6 @@ class Rac {
             return os;
         }
 };
-
 class LongLong {
     private:
         int high;  
@@ -113,7 +111,6 @@ class LongLong {
             return os;
         }
 };
-
 class Time {
     private:
         int hour;
@@ -153,7 +150,6 @@ class Time {
             else this->set(0, 0,s1 - s2+86400);
         }
 };
-
 class Length {
     private:
         double leng;
@@ -180,7 +176,6 @@ class Length {
             else if (mode == 7) std::cout << "Длина в Km: " << leng / 1000.0f << std::endl;
         }
 };
-
 class Weight {
     private:
         double weg;
@@ -207,7 +202,6 @@ class Weight {
             else if (mode == 7) std::cout << "Вес в тоннах: " << weg / 1000.0f << std::endl;
         }
 };
-
 class Temperature {
 private:
     double temp;
@@ -228,15 +222,14 @@ public:
         else if (mode == 1) std::cout << "Температура в Фаренгейта: " << temp * 9 / 5 + 33.8 << std::endl;
         else if (mode == 2) std::cout << "Температура в Кельвина: " << temp + 273.15 << std::endl;
         else if (mode == 3) std::cout << "Температура в Ранкина: " << (temp + 273.15)*9/5 << std::endl;
-        else if (mode == 4) std::cout << "Температура в Реомюра: " << temp * 0.8 << std::endl;
-        
+        else if (mode == 4) std::cout << "Температура в Реомюра: " << temp * 0.8 << std::endl;    
     }
 };
 void main()
 {
     setlocale(LC_ALL, "Russian");
     //1.1
-    Rac rac1(1, 0, 3), rac2(2, 10, 7), rac3;
+    Rac rac1(1, 5, 3), rac2(2, 10, 7), rac3;
     rac3 = rac1 + rac2;
     std::cout << " ПЕРВЫЙ КЛАСС РАЦИОНАЛЬНЫЕ ЧИСЛА" << std::endl;
     std::cout << rac1 << " + " << rac2 << " = " << rac3 << std::endl;
@@ -293,10 +286,4 @@ void main()
     {
         tem.output(i);
     }
-
-
-
-
-
-
 }
