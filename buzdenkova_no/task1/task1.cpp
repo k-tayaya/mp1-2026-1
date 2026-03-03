@@ -1,115 +1,99 @@
 #include <iostream>
 
-class LongNumber
-{
+class LongNumber {
+private:
+    int64_t result;
+
 public:
     int first;
     unsigned int second;
-    bool init(int s, unsigned int m)
-    {
-        if (m < 0)
-            return false;
-        else
-        {
-            first = s;
-            second = m;
-            return true;
-        }
+
+    LongNumber(int64_t r = 0) : result(r) {}
+
+    LongNumber(int32_t first, uint32_t second) :
+        result(static_cast<int64_t>(first) << 32 | second) {
     }
 
-    LongNumber add(const LongNumber& a, const LongNumber& b);
-    LongNumber sub(const LongNumber& a, const LongNumber& b);
-    LongNumber mul(const LongNumber& a, const LongNumber& b);
-    LongNumber divc(const LongNumber& a, const LongNumber& b);
-    LongNumber divr(const LongNumber& a, const LongNumber& b);
+    void print() const {
+        std::cout << result << '\n';
+    }
 
-    void read();
+    int64_t toInt64() const {
+        return result;
+    }
+
+    LongNumber add(const LongNumber& b);
+    LongNumber sub(const LongNumber& b);
+    LongNumber mul(const LongNumber& b);
+    LongNumber divc(const LongNumber& b);
+    LongNumber divr(const LongNumber& b);
 
 };
 
-LongNumber LongNumber::add(const LongNumber& a, const LongNumber& b)
+LongNumber LongNumber::add(const LongNumber& b)
 {
     LongNumber t;
-    t.first = a.first + b.first;
-    t.second = a.second + b.second;
-    if (t.second > 999999999)
-    {
-        t.first = t.first + 1;
-        t.second = t.second - 1000000000;
-    }
+    t.result = result + b.result;
     return t;
 }
 
-LongNumber LongNumber::sub(const LongNumber& a, const LongNumber& b)
+LongNumber LongNumber::sub(const LongNumber& b)
 {
     LongNumber t;
-    t.first = a.first - b.first;
-    t.second = a.second - b.second;
+    t.result = result - b.result;
     return t;
 }
 
-LongNumber LongNumber::mul(const LongNumber& a, const LongNumber& b)
-
+LongNumber LongNumber::mul(const LongNumber& b)
 {
     LongNumber t;
-    t.first = a.first * b.first;
-    t.second = a.second * b.second;
+    t.result = result * b.result;
     return t;
 }
 
-LongNumber LongNumber::divc(const LongNumber& a, const LongNumber& b)
+LongNumber LongNumber::divc(const LongNumber& b)
 {
     LongNumber t;
-    t.first = a.first / b.first;
-    t.second = a.second / b.second;
+    t.result = result / b.result;
     return t;
 }
 
-LongNumber LongNumber::divr(const LongNumber& a, const LongNumber& b)
+LongNumber LongNumber::divr(const LongNumber& b)
 {
     LongNumber t;
-    t.first = a.first % b.first;
-    t.second = a.second % b.second;
+    t.result = result % b.result;
     return t;
 }
-
-void LongNumber::read()
-{
-    int s = 0;
-    unsigned int m = 0;
-    do
-    {
-        std::cout << "First number: ";
-        std::cin >> s;
-        std::cout << "Second number: ";
-        std::cin >> m;
-    } while (!init(s, m));
-}
-
 
 int main() {
-    LongNumber a, b, result;
+    LongNumber a(0xFFFE, 0xFEDC);
+    LongNumber b(0xAABBCCDD);
 
-    std::cout << "Print first number:" << std::endl;
-    a.read();
+    std::cout << "Print first number:";
+    a.print();
 
-    std::cout << "Print second number:" << std::endl;
-    b.read();
+    std::cout << "Print second number:";
+    b.print();
 
-    result = a.add(a, b);
-    std::cout << "Sum: " << result.first << " " << result.second << std::endl;
+    LongNumber sum = a.add(b);
+    std::cout << "Sum: ";
+    sum.print();
 
-    result = a.sub(a, b);
-    std::cout << "Difference: " << result.first << " " << result.second << std::endl;
+    LongNumber sub = a.sub(b);
+    std::cout << "Difference: ";
+    sub.print();
 
-    result = a.mul(a, b);
-    std::cout << "Multiplication: " << result.first << " " << result.second << std::endl;
+    LongNumber mul = a.mul(b);
+    std::cout << "Multiplication: ";
+    mul.print();
 
-    result = a.divc(a, b);
-    std::cout << "Division is complete: " << result.first << " " << result.second << std::endl;
+    LongNumber divc = a.divc(b);
+    std::cout << "Division is complete: ";
+    divc.print();
 
-    result = a.divr(a, b);
-    std::cout << "Division with remainder: " << result.first << " " << result.second << std::endl;
+    LongNumber divr = a.divr(b);
+    std::cout << "Division with remainder: ";
+    divr.print();
 
     return 0;
 }
