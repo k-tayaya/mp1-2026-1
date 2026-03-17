@@ -29,11 +29,8 @@ public:
     }
  
     ~DynamicArray() {
-        if (a != nullptr) {
             delete[] a;
         }
-        n = 0;
-    }
 
     DynamicArray& operator=(const DynamicArray& b) {
         if (this != &b) {
@@ -59,25 +56,16 @@ public:
     void set(int index, double value) {
         if (index >= 0 && index < n) {
             a[index] = value;
-        } else {
-            cout << "Введен некорректный индекс.\n";
         }
     }
 // 4) узнать элемент массива по его индексу
     double get(int index) {
         if (index >= 0 && index < n) {
             return a[index];
-        } else {
-            cout << "Введен некорректный индекс.\n";
-            return 0.0;
-        }
+        } 
     }
   //5) найти минимальный элемент массива
     double min() {
-        if (n == 0) {
-            cout << "Введен некорректный индекс.\n";
-            return 0.0;
-        }
         double m = a[0];
         for (int i = 1; i < n; i++) {
             if (a[i] < m) {
