@@ -95,7 +95,6 @@ public:
                 vagony.push_back(Vagon(i, "platzkart"));
             }
             
-    
             ceny["platzkart"]["verh"] = 1000;
             ceny["platzkart"]["niz"] = 1200;
             ceny["kupe"]["verh"] = 1600;
@@ -120,7 +119,6 @@ public:
         }
     }
     
-
     vector<Vagon*> naytiVagonyPoTipu(string tipVagona) {
         vector<Vagon*> result;
         for (int i = 0; i < vagony.size(); i++) {
@@ -131,7 +129,6 @@ public:
         return result;
     }
     
-
     int cenaBileta(string tipVagona, string tipMesta) {
         return ceny[tipVagona][tipMesta];
     }
@@ -161,7 +158,7 @@ public:
                 return &vsePoezda[i];
             }
         }
-        return NULL;
+        return nullptr;
     }
 };
 
@@ -183,19 +180,16 @@ public:
             vsegoMest += item.second;
         }
         if (vsegoMest != fios.size()) {
-            cout << "Oshibka: kolichestvo FIO ne sovpadaet s kolichestvom mest!" << endl;
             return false;
         }
  
         Poezd* poezd = doroga.naytiPoezd(nomerPoezda, data);
         if (poezd == NULL) {
-            cout << "Poezd ne nayden!" << endl;
             return false;
         }
         
         vector<Vagon*> podhodyashieVagony = poezd->naytiVagonyPoTipu(tipVagona);
         if (podhodyashieVagony.empty()) {
-            cout << "Vagonov tipa " << tipVagona << " net v etom poezde!" << endl;
             return false;
         }
        
@@ -233,7 +227,6 @@ public:
         }
         
         if (vybranniyVagon == NULL) {
-            cout << "NE UDALOS: nelzya vse mesta vydat v odnom vagone!" << endl;
             return false;
         }
         
@@ -258,13 +251,11 @@ public:
             indexFIO++;
         }
         
-        cout << "Mesta zarezervirovany! Vsego biletov: " << tekushiyZakaz.size() << endl;
         return true;
     }
   
     int raschitatStoimost() {
         if (tekushiyZakaz.empty()) {
-            cout << "Net aktivnogo zakaza!" << endl;
             return 0;
         }
         
@@ -284,18 +275,14 @@ public:
                 summa += poezd->cenaBileta(tipVagona, tekushiyZakaz[i].tipMesta);
             }
         }
-        
-        cout << "Obshaya stoimost: " << summa << " rubley" << endl;
         return summa;
     }
 
     void sformirovatBilety() {
         if (tekushiyZakaz.empty()) {
-            cout << "Net zakaza dlya oformlenia!" << endl;
             return;
         }
-        
-        cout << "\n========== BILETY ==========" << endl;
+      
         for (int i = 0; i < tekushiyZakaz.size(); i++) {
             doroga.vseBilety.push_back(tekushiyZakaz[i]);
             
@@ -308,14 +295,12 @@ public:
             cout << "Otpravlenie: " << tekushiyZakaz[i].stanciaOtpravlenia << endl;
             cout << "Pribytie: " << tekushiyZakaz[i].stanciaPribytia << endl;
         }
-        cout << "============================" << endl;
         
         tekushiyZakaz.clear();
     }
    
     void otmenitZakaz() {
         if (tekushiyZakaz.empty()) {
-            cout << "Net aktivnogo zakaza dlya otmeny!" << endl;
             return;
         }
     
@@ -332,23 +317,19 @@ public:
         }
         
         tekushiyZakaz.clear();
-        cout << "Zakaz otmenen! Mesta osvobozhdeny." << endl;
     }
     
 
     void proveritNalichie(string data, int nomerPoezda, string tipVagona, 
                           map<string, int> trebuetsyaMest) {
-        cout << "\n--- Proverka nalichia mest ---" << endl;
         
         Poezd* poezd = doroga.naytiPoezd(nomerPoezda, data);
         if (poezd == NULL) {
-            cout << "Poezd ne nayden!" << endl;
             return;
         }
         
         vector<Vagon*> vagony = poezd->naytiVagonyPoTipu(tipVagona);
         if (vagony.empty()) {
-            cout << "Vagonov tipa " << tipVagona << " net!" << endl;
             return;
         }
         
@@ -365,16 +346,8 @@ public:
                     break;
                 }
             }
-            if (vmeshaetsa) {
-                cout << "Est svobodnye mesta v vagone №" << vagony[v]->nomer << endl;
-                naydeno = true;
-                break;
-            }
         }
         
-        if (!naydeno) {
-            cout << "Svobodnyh mest net ni v odnom vagone!" << endl;
-        }
     }
 };
 
@@ -394,9 +367,7 @@ int main() {
     }
     
     cout << "\n";
-    
- 
-    
+     
     cout << "Проверка наличия мест" << endl;
     map<string, int> b;
     b["niz"] = 3;
